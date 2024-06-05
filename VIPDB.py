@@ -1,16 +1,19 @@
-python -m pip show oracledb <<< Shows details for package: oracledb
+import getpass
+import oracledb
 
-CLOUD ACCOUND NAME IS : vipmonty24
-
-
-USEFUL LINKS: 
 # go to this link for instructions: https://oracle.github.io/python-oracledb/
 # go to this link to continue tutorial: https://oracle.github.io/python-oracledb/samples/tutorial/Python-and-Oracle-Database-The-New-Wave-of-Scripting.html
 
+# pw = getpass.getpass("Enter password: ")
+pw = "Sky8pr24!!Sky8pr24!!"
+connection = oracledb.connect(
+    user="ADMIN",
+    password=pw,
+    dsn="(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-sanjose-1.oraclecloud.com))(connect_data=(service_name=g5dda15b7e5cf8c_vipdb_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))")  # the connection string copied from the cloud console
 
-======================================================================================
-EXAMPLE OF CREATE TABLE:
+print("Successfully connected to Oracle Database")
 
+# ===========================CREATE TABLES=========================================
 # Create a table
 # with connection.cursor() as cursor:
 
@@ -31,7 +34,6 @@ EXAMPLE OF CREATE TABLE:
 
 
 
-EXAMPLE OF INSERT MULTIPLE ROWS:
     # print(f"Table created {connection.version}")
 # ===============================INSERT MULTIPLE ROWS=================================
 # Insert some data
@@ -58,12 +60,10 @@ EXAMPLE OF INSERT MULTIPLE ROWS:
 #         else:
 #             print(row[0], "is NOT done")
 
-
-=====================================================================================
-EXAMPLE OF SELECT STATEMENT OF ALL ROWS:
-
+# ===================================SELECT STATEMENTS=================================
 cur = connection.cursor()
 cur.execute("Select * from todoitem")
 res = cur.fetchall()
 for row in res:
     print(row)
+
