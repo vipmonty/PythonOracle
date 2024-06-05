@@ -14,28 +14,28 @@ connection = oracledb.connect(
 print("Successfully connected to Oracle Database")
 
 # Create a table
-with connection.cursor() as cursor:
+# with connection.cursor() as cursor:
 
-    cursor.execute("""
-        begin
-            execute immediate 'drop table todoitem';
-            exception when others then if sqlcode <> -942 then raise; end if;
-        end;""")
+#     cursor.execute("""
+#         begin
+#             execute immediate 'drop table todoitem';
+#             exception when others then if sqlcode <> -942 then raise; end if;
+#         end;""")
 
-    cursor.execute("""
-        create table todoitem (
-            id number generated always as identity,
-            description varchar2(4000),
-            creation_ts timestamp with time zone default current_timestamp,
-            done number(1,0),
-            primary key (id))""")
+#     cursor.execute("""
+#         create table todoitem (
+#             id number generated always as identity,
+#             description varchar2(4000),
+#             creation_ts timestamp with time zone default current_timestamp,
+#             done number(1,0),
+#             primary key (id))""")
 
-    print("Table created")
+#     print("Table created")
 
 # Insert some data
 with connection.cursor() as cursor:
 
-    rows = [("Task 1", 0),
+    rows = [("buy redbull", 1),
             ("Task 2", 0),
             ("Task 3", 1),
             ("Task 4", 0),
