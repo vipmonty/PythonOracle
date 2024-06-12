@@ -67,3 +67,33 @@ cur.execute("Select * from todoitem")
 res = cur.fetchall()
 for row in res:
     print(row)
+
+=============SELECT WHERE STATEMENT==================================================
+# =================================SELECT WHERE STATEMENT================================
+
+# Create a cursor object
+cursor = connection.cursor()
+
+# Define the SQL query
+query = """
+SELECT *
+FROM todoitem
+WHERE description = :value
+"""
+
+# Execute the query with a parameter value
+cursor.execute(query, value="buy redbull")
+
+# Fetch all rows matching the query
+rows = cursor.fetchall()
+
+# Print the results
+for row in rows:
+    print(row)
+
+
+# =========================CLOSE CURSOR() AND CONNECTION================================
+
+# Close the cursor and connection
+cursor.close()
+connection.close()

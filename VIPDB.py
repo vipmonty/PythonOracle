@@ -5,7 +5,7 @@ import oracledb
 # go to this link to continue tutorial: https://oracle.github.io/python-oracledb/samples/tutorial/Python-and-Oracle-Database-The-New-Wave-of-Scripting.html
 
 # pw = getpass.getpass("Enter password: ")
-pw = "Sky8pr24!!Sky8pr24!!"
+pw = input('Enter your password Vip:')
 connection = oracledb.connect(
     user="ADMIN",
     password=pw,
@@ -60,10 +60,40 @@ print("Successfully connected to Oracle Database")
 #         else:
 #             print(row[0], "is NOT done")
 
-# ===================================SELECT STATEMENTS=================================
+# ===================================SELECT * STATEMENTS=================================
 cur = connection.cursor()
 cur.execute("Select * from todoitem")
 res = cur.fetchall()
 for row in res:
     print(row)
 
+cur.close
+connection.close
+# =================================SELECT WHERE STATEMENT================================
+
+# Create a cursor object
+# cursor = connection.cursor()
+
+# # Define the SQL query
+# query = """
+# SELECT *
+# FROM todoitem
+# WHERE description = :value
+# """
+
+# # Execute the query with a parameter value
+# cursor.execute(query, value="buy redbull")
+
+# # Fetch all rows matching the query
+# rows = cursor.fetchall()
+
+# # Print the results
+# for row in rows:
+    # print(row)
+
+
+# =========================CLOSE CURSOR() AND CONNECTION================================
+
+# Close the cursor and connection
+# cursor.close()
+# connection.close()
