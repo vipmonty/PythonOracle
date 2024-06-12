@@ -19,9 +19,9 @@ else:
     try:
         # ==========================CREATE TABLE=======================================================
         cur = connection.cursor()
-        sql_insert = """
-        INSERT INTO CEO_DETAILS VALUES ('VIPHAKONE', 'MONTY', 'CALICO', 24)"""
-        cur.execute(sql_insert)
+        sql_insert = """INSERT INTO CEO_DETAILS VALUES (:1,:2,:3,:4)"""#<=represents the fields
+        values = [('BONSON','LAY','CALI-CO',24),('JOHNNY','BUN','CALI-CO',24),('KHOM','SISINTHONG','DA VILL',24)]
+        cur.executemany(sql_insert, values)
         connection.commit()
         # sql_create = """
         # CREATE TABLE CEO_DETAILS(

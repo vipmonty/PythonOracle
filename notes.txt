@@ -1,6 +1,36 @@
 python -m pip show oracledb <<< Shows details for package: oracledb
 
 CLOUD ACCOUNT NAME IS : vipmonty24
+connecting to OracleCloud Database
+====================================================================================
+oracledb STANDARD STEPS TO COMMUNICATE WITH Database
+Execute query with cursor method
+    cursor.execute() # to execute a single query
+    cursor.executemany() #execute a parameterized query
+
+Fetch the results, with inbuild methods
+    cursor.fetchone() #fetch only one row
+    cursor.fetchall() #fetch all rows
+    cursor.fetchmany(n) #fetch n number of rows
+
+====================================================================================
+import getpass
+import oracledb
+
+# go to this link for instructions: https://oracle.github.io/python-oracledb/
+# go to this link to continue tutorial: https://oracle.github.io/python-oracledb/samples/tutorial/Python-and-Oracle-Database-The-New-Wave-of-Scripting.html
+try:
+    # pw = getpass.getpass("Enter password: ")
+    pw = input('Enter your password Vip:')
+    connection = oracledb.connect(
+        user="ADMIN",
+        password=pw,
+        dsn="(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-sanjose-1.oraclecloud.com))(connect_data=(service_name=g5dda15b7e5cf8c_vipdb_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))")  # the connection string copied from the cloud console
+
+    print("Successfully connected to Oracle Database")
+====================================================================================
+
+
 
 
 USEFUL LINKS: 
@@ -164,4 +194,14 @@ finally:
         sql_insert = """
         INSERT INTO CEO_DETAILS VALUES ('VIPHAKONE', 'MONTY', 'CALICO', 24)"""
         cur.execute(sql_insert)
+        connection.commit() #<====== IF YOU DON'T connection.commit it will not show in DB
+
+
+=====================ADDING MULTIPLE ROW OR DATA Version 2=========================
+        cur = connection.cursor()
+        sql_insert = """INSERT INTO CEO_DETAILS VALUES (:1,:2,:3,:4)"""#<=represents the fields
+        values = [('BONSON','LAY','CALI-CO',24),('JOHNNY','BUN','CALI-CO',24),('KHOM','SISINTHONG','DA VILL',24)]
+        cur.executemany(sql_insert, values)
         connection.commit()
+
+=======================Adding a Database field using ALTER TABLE=========
