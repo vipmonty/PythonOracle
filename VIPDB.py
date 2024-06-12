@@ -19,16 +19,20 @@ else:
     try:
         # ==========================CREATE TABLE=======================================================
         cur = connection.cursor()
-        sql_create = """
-        CREATE TABLE CEO_DETAILS(
-            FIRST_NAME VARCHAR2(50),
-            LAST_NAME VARCHAR2(50),
-            COMPANY VARCHAR2(50),
-            AGE NUMBER
-        )
-        """
-        cur.execute(sql_create)
-        print('Table Created')
+        sql_insert = """
+        INSERT INTO CEO_DETAILS VALUES ('VIPHAKONE', 'MONTY', 'CALICO', 24)"""
+        cur.execute(sql_insert)
+        connection.commit()
+        # sql_create = """
+        # CREATE TABLE CEO_DETAILS(
+        #     FIRST_NAME VARCHAR2(50),
+        #     LAST_NAME VARCHAR2(50),
+        #     COMPANY VARCHAR2(50),
+        #     AGE NUMBER
+        # )
+        # """
+        # cur.execute(sql_create)
+        # print('Table Created')
     except Exception as err:
         print('Error while inserting the data', err)
     else:
