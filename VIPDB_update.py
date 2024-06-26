@@ -21,11 +21,11 @@ else:
         with connection.cursor() as cursor:
             update_sql = '''
             UPDATE CEO_DETAILS
-            SET COMPANY = :NEW_COMPANY_VALUE
+            SET AGE = :NEW_COMPANY_VALUE
             WHERE FIRST_NAME = :FIRST_NAME            '''
 
             # Define the values for the update
-            NEW_COMPANY_VALUE = "CALI-CO"
+            NEW_COMPANY_VALUE = "99"
             FIRST_NAME = "VIPHAKONE"
             
             # Execute the update statment

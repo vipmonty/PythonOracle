@@ -19,7 +19,7 @@ else:
     try:
         # ==========================DROP TABLE=======================================================
         with connection.cursor() as cursor:
-            table_name = "TODOITEM"
+            table_name = input("Enter name of Table you would like to drop:")
             drop_table_sql = f"DROP TABLE {table_name}"
             cursor.execute(drop_table_sql)
             # cursor.close()
