@@ -26,11 +26,11 @@ else:
         query = """
         SELECT *
         FROM CEO_DETAILS
-        WHERE COMPANY = :value
+        WHERE email != :value
         """
 
         # Execute the query with a parameter value
-        cursor.execute(query, value="CALI-CO")
+        cursor.execute(query, value="Null")
 
         # Fetch all rows matching the query
         rows = cursor.fetchall()
