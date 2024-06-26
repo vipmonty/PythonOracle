@@ -10,8 +10,9 @@ def index():
 
 @app.route('/records')
 def records():
+    table_name = "CEO_DETAILS"
     records = VIPDB_on_flask.get_all_records()
-    return render_template('records.html', records=records)
+    return render_template('records.html', table_name=table_name, records=records)
 
 @app.route('/describe_table', methods=['GET', 'POST'])
 def describe_table():
