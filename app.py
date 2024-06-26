@@ -22,5 +22,10 @@ def describe_table():
     
     return render_template('describe_table.html', result=result)
 
+@app.route('/display_schema')
+def display_schema():
+    schema = VIPDB_on_flask.get_schema()
+    return render_template('display_schema.html', schema=schema)
+
 if __name__ == '__main__':
     app.run(debug=True)

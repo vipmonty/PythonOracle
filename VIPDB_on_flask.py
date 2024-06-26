@@ -59,3 +59,36 @@ def describe_table(table_name):
             cur.close()
         if connection:
             connection.close()
+
+def get_schema():
+    connection = get_connection()
+    if connection is None:
+        return []
+
+    try:
+        cur = connection.cursor()
+        schema_sql = """
+        SELECT table_name, column_name, data_type, nullable 
+        FROM user_tab_columns 
+        ORDER BY table_name, column_id
+        """
+        cur.execute(schema_sql)
+        res = cur.fetchall()
+        schema = [
+            {
+                'table_name': row[0],
+                'column_name': row[1],
+                'data_type': row[2],
+                'nullable': row[3]
+            }
+            for row in res
+        ]
+        return schema
+    except Exception as err:
+        print('Error while fetching the schema:', err)
+        return []
+    finally:
+        if cur:
+            cur.close()
+        if connection:
+            connection.close()
