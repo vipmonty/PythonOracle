@@ -1,10 +1,10 @@
 import oracledb
 
-def insert_record(first_name, last_name, company, age):
+def insert_record(email, first_name, last_name, company, age):
     connection = None
     cur = None
     try:
-        pw = "YOUR_PASSWORD"  # Replace with your secure password management
+        pw = input("Enter the password Vip:")  # Replace with your secure password management
         connection = oracledb.connect(
             user="ADMIN",
             password=pw,
@@ -18,10 +18,10 @@ def insert_record(first_name, last_name, company, age):
         try:
             cur = connection.cursor()
             insert_sql = """
-            INSERT INTO CEO_DETAILS (first_name, last_name, company, age)
-            VALUES (:1, :2, :3, :4)
+            INSERT INTO CEO_DETAILS (email, first_name, last_name, company, age)
+            VALUES (:1, :2, :3, :4, :5)
             """
-            cur.execute(insert_sql, (first_name, last_name, company, age))
+            cur.execute(insert_sql, (email, first_name, last_name, company, age))
             connection.commit()
             print("Record inserted successfully")
             return True
@@ -36,12 +36,13 @@ def insert_record(first_name, last_name, company, age):
 
 if __name__ == "__main__":
     # Example usage
+    email = input("Enter Email")
     first_name = input("Enter first name: ")
     last_name = input("Enter last name: ")
     company = input("Enter company: ")
     age = int(input("Enter age: "))
 
-    success = insert_record(first_name, last_name, company, age)
+    success = insert_record(email, first_name, last_name, company, age)
     if success:
         print("Insertion completed.")
     else:

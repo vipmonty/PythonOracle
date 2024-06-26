@@ -24,16 +24,17 @@ def get_connection():
 def get_all_records():
     connection = get_connection()
     if connection is None:
-        return []
+        return [], []
 
     try:
         cur = connection.cursor()
-        cur.execute("SELECT first_name, last_name, company, age FROM CEO_DETAILS")
-        res = cur.fetchall()
-        return res
+        cur.execute("SELECT * FROM CEO_DETAILS")
+        columns = [col[0] for col in cur.description]
+        records = cur.fetchall()
+        return columns, records
     except Exception as err:
         print('Error while fetching the data:', err)
-        return []
+        return [], []
     finally:
         if cur:
             cur.close()
@@ -87,6 +88,27 @@ def get_schema():
     except Exception as err:
         print('Error while fetching the schema:', err)
         return []
+    finally:
+        if cur:
+            cur.close()
+        if connection:
+            connection.close()
+
+def add_column(table_name, column_name, data_type):
+    connection = get_connection()
+    if connection is None:
+        return False
+
+    try:
+        cur = connection.cursor()
+        alter_table_sql = f"ALTER TABLE {table_name} ADD {column_name} {data_type}"
+        cur.execute(alter_table_sql)
+        connection.commit()
+        print(f"Column '{column_name}' added successfully to table '{table_name}'")
+        return True
+    except Exception as err:
+        print('Error while adding the column:', err)
+        return False
     finally:
         if cur:
             cur.close()

@@ -11,8 +11,8 @@ def index():
 @app.route('/records')
 def records():
     table_name = "CEO_DETAILS"
-    records = VIPDB_on_flask.get_all_records()
-    return render_template('records.html', table_name=table_name, records=records)
+    columns, records = VIPDB_on_flask.get_all_records()
+    return render_template('records.html', table_name=table_name, columns=columns, records=records)
 
 @app.route('/describe_table', methods=['GET', 'POST'])
 def describe_table():
@@ -27,6 +27,22 @@ def describe_table():
 def display_schema():
     schema = VIPDB_on_flask.get_schema()
     return render_template('display_schema.html', schema=schema)
+
+@app.route('/add_column', methods=['GET', 'POST'])
+def add_column():
+    if request.method == 'POST':
+        table_name = request.form['table_name']
+        column_name = request.form['column_name']
+        data_type = request.form['data_type']
+        
+        if VIPDB_on_flask.add_column(table_name, column_name, data_type):
+            flash('Column added successfully', 'success')
+        else:
+            flash('Error adding column', 'danger')
+        
+        return redirect(url_for('add_column'))
+    
+    return render_template('add_column.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
