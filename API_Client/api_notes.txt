@@ -1,0 +1,18 @@
+PYTHON API
+
+install requests: 
+    pip install requests
+
+import requests into your script:
+    import requests
+
+GET / WORKING WITH JSON
+    r = requests.get(<url as str>)
+    data = r.json() <==========THIS TURN RESPONSE TO json which returns
+                               a bunch of dictionaries
+
+    TO QUARIE KEY/TAGS FROM GET RESPONSE:
+            data['info'] <=====THIS RETURNS THE VALUE TO KEY/TAG 'info'
+
+    TO QUARIE KEYS/TAGS WITHIN 'info'
+            data['info']['pages'] 
