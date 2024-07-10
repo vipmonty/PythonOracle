@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
 
 #https://www.youtube.com/watch?v=tb8gHvYlCFs&t=1127s
 #https://www.youtube.com/watch?v=-oPuGc05Lxs
@@ -22,6 +23,7 @@ def parse_json(response):
     charlist = []
     for item in response['results']:
         char = {
+            'id': item['id'],
             'name': item['name'],
             'num_of_episode': len(item['episode']),
         }
@@ -34,9 +36,12 @@ for x in range(1,get_pages(data)+1):
     print(x)
     mainlist.extend(parse_json(main_request(base_url,end_point, x)))
 
-print(len(mainlist))
+# print(len(mainlist))
 # print(get_pages(data))
 # print(parse_json(data))
 
+dataframe = pd.DataFrame(mainlist)
+# print(dataframe.head(), dataframe.tail())#<====Print out to console
 
 
+dataframe.to_csv('charlist.csv', index=False)
